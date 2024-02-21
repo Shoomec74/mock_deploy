@@ -33,4 +33,3 @@ git clone [URL репозитория] --recursive
 git pull
 git submodule update --init --recursive
 ```
-
