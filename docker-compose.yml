@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  backend_mock:
+    container_name: mock_server
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT_CONTAINER:-3000}:${APP_PORT:-3000}"
+    env_file:
+      - .env
+    restart: always
+
+  frontend_mock:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: frontend
+    depends_on:
+      - backend_mock
+    container_name: mock_chat
+    ports:
+      - '8888:80'
+    restart: on-failure
+
